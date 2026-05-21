@@ -261,10 +261,43 @@
       letter-spacing: 0;
     }
 
+    .filters-panel .controls {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px 18px;
+      align-items: end;
+    }
+
+    .filters-panel .control,
+    .filters-panel .multi-select,
+    .filters-panel .select-wrap {
+      min-width: 0;
+      max-width: 100%;
+      width: 100%;
+    }
+
     .filters-panel .multi-select-button,
     .filters-panel select {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      height: 40px;
       background: var(--white);
       border-radius: 6px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .filters-panel .multi-select-button {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 36px 0 12px;
+    }
+
+    .filters-panel .multi-select {
+      max-width: 100%;
+      min-width: 0;
     }
 
     .search-toolbar {
@@ -432,6 +465,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+      min-width: 0;
     }
 
     .active-filters-bar {
@@ -568,10 +602,13 @@
 
     .multi-select-button {
       width: 100%;
-      height: 52px;
+      max-width: 100%;
+      min-width: 0;
+      height: 40px;
       border: 1px solid var(--line);
-      border-radius: 0;
+      border-radius: 6px;
       background: var(--grey-bg);
+      box-sizing: border-box;
       padding: 0 48px 0 16px;
       font-family: var(--font-ui);
       font-size: 16px;
@@ -1055,7 +1092,7 @@
         justify-content: flex-start;
       }
 
-      .controls {
+      .filters-panel .controls {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -1064,6 +1101,10 @@
     @media (max-width: 760px) {
       :root {
         --layout-gutter: 24px;
+      }
+
+      .filters-panel .controls {
+        grid-template-columns: 1fr;
       }
 
       .contact-grid {
@@ -1103,7 +1144,7 @@
     <div class="hero-band">
       <div class="layout-wide">
         <header class="page-header">
-          <div class="eyebrow" id="pageEyebrow">E Pluribus Research Library</div>
+          <div class="eyebrow" id="pageEyebrow">E Pluribus Research Library B</div>
           <h1 id="pageTitle">Supporting you at the forefront of immigrant-inclusive economic development.</h1>
           <p class="intro" id="pageIntro">
             A designated place for people to find and share research, reports, and other resources related to immigrant inclusion, economic development, and international talent
@@ -1131,68 +1172,58 @@
         </div>
 
         <div class="filters-panel" aria-label="Filters and sort">
-          <section class="filters-section" aria-label="Optional filters">
-            <h2 class="filters-heading">Filters By</h2>
+          <section class="filters-section" aria-label="Filters and sort">
             <div class="controls">
               <div class="control">
-                <label for="useCaseFilter">Use Cases</label>
-                <div class="multi-select" id="useCaseFilter">
-                  <button class="multi-select-button" type="button" aria-label="Use case">All</button>
+                <div class="select-wrap">
+                  <select id="sortFilter" aria-label="Sort resources">
+                    <option value="year-desc">Sort By Year (Most Recent)</option>
+                    <option value="title-asc">Sort By Title (A–Z)</option>
+                    <option value="author-asc">Sort By Author (A–Z)</option>
+                    <option value="year-asc">Sort By Year (Oldest to Newest)</option>
+                  </select>
                   <span class="select-icon">▼</span>
-                  <div class="multi-select-panel"></div>
                 </div>
               </div>
 
               <div class="control">
-                <label for="populationFilter">Special Populations Covered</label>
-                <div class="multi-select" id="populationFilter">
-                  <button class="multi-select-button" type="button" aria-label="Special populations covered">All</button>
-                  <span class="select-icon">▼</span>
-                  <div class="multi-select-panel"></div>
-                </div>
-              </div>
-
-              <div class="control">
-                <label for="demographicFilter">Demographic Analysis Included</label>
-                <div class="multi-select" id="demographicFilter">
-                  <button class="multi-select-button" type="button" aria-label="Demographic analysis included">All</button>
-                  <span class="select-icon">▼</span>
-                  <div class="multi-select-panel"></div>
-                </div>
-              </div>
-
-              <div class="control">
-                <label for="geographicFilter">Geographic Focus of the Publication</label>
                 <div class="multi-select" id="geographicFilter">
-                  <button class="multi-select-button" type="button" aria-label="Geographic focus">All</button>
+                  <button class="multi-select-button" type="button" aria-label="Geographic focus of the publication">Geographic Focus of the Publication</button>
                   <span class="select-icon">▼</span>
                   <div class="multi-select-panel"></div>
                 </div>
               </div>
 
               <div class="control">
-                <label for="publicationFormatFilter">Publication Format</label>
                 <div class="multi-select" id="publicationFormatFilter">
-                  <button class="multi-select-button" type="button" aria-label="Publication format">All</button>
+                  <button class="multi-select-button" type="button" aria-label="Publication format">Publication Format</button>
                   <span class="select-icon">▼</span>
                   <div class="multi-select-panel"></div>
                 </div>
               </div>
-            </div>
-          </section>
 
-          <section class="sort-section" aria-label="Sort resources">
-            <h2 class="sort-heading">Sort By</h2>
-            <div class="control">
-              <label for="sortFilter" class="visually-hidden">Sort</label>
-              <div class="select-wrap">
-                <select id="sortFilter" aria-label="Sort resources">
-                  <option value="year-desc">Year (newest first)</option>
-                  <option value="title-asc">Title (A–Z)</option>
-                  <option value="author-asc">Author (A–Z)</option>
-                  <option value="year-asc">Year (oldest first)</option>
-                </select>
-                <span class="select-icon">▼</span>
+              <div class="control">
+                <div class="multi-select" id="useCaseFilter">
+                  <button class="multi-select-button" type="button" aria-label="Use case">Use Case</button>
+                  <span class="select-icon">▼</span>
+                  <div class="multi-select-panel"></div>
+                </div>
+              </div>
+
+              <div class="control">
+                <div class="multi-select" id="populationFilter">
+                  <button class="multi-select-button" type="button" aria-label="Special populations covered">Special Populations Covered</button>
+                  <span class="select-icon">▼</span>
+                  <div class="multi-select-panel"></div>
+                </div>
+              </div>
+
+              <div class="control">
+                <div class="multi-select" id="demographicFilter">
+                  <button class="multi-select-button" type="button" aria-label="Demographic analysis included">Demographic Analysis Included</button>
+                  <span class="select-icon">▼</span>
+                  <div class="multi-select-panel"></div>
+                </div>
               </div>
             </div>
           </section>
@@ -1492,7 +1523,7 @@ const resources = [
         intro: "Learn more about the purpose of this library and the broader work supporting immigrant inclusion and thriving communities."
       },
       resources: {
-        eyebrow: "E Pluribus Research Library",
+        eyebrow: "E Pluribus Research Library B",
         title: "Supporting you at the forefront of immigrant-inclusive economic development.",
         intro: "A designated place for people to find and share research, reports, and practical resources on immigrant inclusion, workforce development, local economies, and thriving communities."
       },
@@ -1737,39 +1768,39 @@ const resources = [
 
     function fillAuxiliaryFilters() {
       renderMultiSelect(
-        demographicPanel,
-        demographicButton,
-        subtypeMap["Demographic Analysis Included"] || [],
-        state.demographics,
-        "All"
-      );
-      renderMultiSelect(
         geographicPanel,
         geographicButton,
         subtypeMap["Geographic Focus of the Publication"] || [],
         state.geographies,
-        "All"
-      );
-      renderMultiSelect(
-        populationPanel,
-        populationButton,
-        subtypeMap["Special Populations Covered"] || [],
-        state.populations,
-        "All"
+        "Geographic Focus of the Publication"
       );
       renderMultiSelect(
         publicationFormatPanel,
         publicationFormatButton,
         subtypeMap["Publication Format"] || [],
         state.publicationFormats,
-        "All"
+        "Publication Format"
       );
       renderMultiSelect(
         useCasePanel,
         useCaseButton,
         subtypeMap["Use Case"] || [],
         state.useCases,
-        "All"
+        "Use Case"
+      );
+      renderMultiSelect(
+        populationPanel,
+        populationButton,
+        subtypeMap["Special Populations Covered"] || [],
+        state.populations,
+        "Special Populations Covered"
+      );
+      renderMultiSelect(
+        demographicPanel,
+        demographicButton,
+        subtypeMap["Demographic Analysis Included"] || [],
+        state.demographics,
+        "Demographic Analysis Included"
       );
     }
 
